@@ -77,7 +77,7 @@ export default function Enquiry() {
 
               <a
                 href="tel:07713743188"
-                className="mt-8 inline-flex items-center gap-2 text-2xl sm:text-3xl font-bold tracking-tight text-[#2F6E9E] underline underline-offset-8 decoration-2 decoration-[#2F6E9E]/30 transition-colors hover:decoration-[#2F6E9E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F6E9E]"
+                className="mt-8 inline-flex min-h-[44px] items-center gap-2 text-2xl sm:text-3xl font-bold tracking-tight text-[#2F6E9E] underline underline-offset-8 decoration-2 decoration-[#2F6E9E]/30 transition-colors hover:decoration-[#2F6E9E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F6E9E]"
               >
                 {t.enquiry.phone}
                 <ArrowUpRight className="w-5 h-5 shrink-0" aria-hidden="true" />

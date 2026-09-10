@@ -43,7 +43,7 @@ export default function Hero() {
 
               <a
                 href="#services"
-                className="text-sm text-[#12303F] underline underline-offset-4 decoration-[#DCE6EB] transition-colors hover:decoration-[#2F6E9E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F6E9E]"
+                className="inline-flex min-h-[44px] items-center text-sm text-[#12303F] underline underline-offset-4 decoration-[#DCE6EB] transition-colors hover:decoration-[#2F6E9E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F6E9E]"
               >
                 {t.hero.link}
               </a>

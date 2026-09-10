@@ -53,3 +53,18 @@ html[lang='zh'] :is(h1, h2, h3):not([data-latin]) {
 html[lang='zh'] :is(h1, h2, h3):not([data-latin]) {
   text-wrap: pretty;
 }
+
+/* Full-viewport height that survives mobile browser chrome.
+   100vh on iOS Safari and Chrome Android measures the viewport with the URL bar
+   *hidden*, so a 100vh section is taller than what you can actually see and its
+   bottom row gets pushed under the browser UI. 100dvh tracks the visible area as
+   that chrome collapses. vh stays as the fallback for browsers without dvh. */
+.h-viewport {
+  height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  .h-viewport {
+    height: 100dvh;
+  }
+}

@@ -27,7 +27,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-3 sm:h-20 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-6">
           <Link
             to="/"
-            className={`flex shrink-0 items-center gap-2 rounded-lg ${FOCUS} md:justify-self-start`}
+            className={`flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg ${FOCUS} md:justify-self-start`}
           >
             <Wind className="h-5 w-5 shrink-0 text-[#0B3B60]" aria-hidden="true" />
             <span className="text-xl font-bold tracking-tight text-[#12303F]" data-latin>{t.brand.name}</span>
@@ -52,7 +52,7 @@ export default function Header() {
 
             <a
               href={PHONE_HREF}
-              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[#DCE6EB] px-3 py-1.5 text-xs font-semibold text-[#12303F] transition-colors hover:border-[#2F6E9E] hover:text-[#2F6E9E] sm:gap-2 sm:px-4 sm:py-2 sm:text-sm ${FOCUS}`}
+              className={`flex min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-full border border-[#DCE6EB] px-3.5 py-1.5 text-xs font-semibold text-[#12303F] transition-colors hover:border-[#2F6E9E] hover:text-[#2F6E9E] sm:min-h-0 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm ${FOCUS}`}
             >
               <Phone className="h-3.5 w-3.5 shrink-0 sm:hidden" aria-hidden="true" />
               {t.nav.phone}

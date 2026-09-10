@@ -85,7 +85,7 @@ export default function CinematicHero() {
   return (
     <section
       onClick={handleClick}
-      className={`relative w-full h-screen overflow-hidden ${isTouch ? 'cursor-auto' : 'cursor-none'}`}
+      className={`relative w-full h-viewport overflow-hidden ${isTouch ? 'cursor-auto' : 'cursor-none'}`}
     >
       {/* Painted behind the footage so a slow or blocked video never shows white. */}
       <div
@@ -235,11 +235,11 @@ export default function CinematicHero() {
           bottom centre, and both stop the click so neither fires the video toggle. */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="absolute z-20 bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase"
+        className="absolute z-20 bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.2em] uppercase"
       >
         <Link
           to="/site"
-          className="text-white/70 hover:text-white transition-colors cursor-pointer"
+          className="inline-flex min-h-[44px] items-center px-2 -mx-1 text-white/70 hover:text-white transition-colors cursor-pointer"
         >
           {t.cinematic.enterSite}
         </Link>

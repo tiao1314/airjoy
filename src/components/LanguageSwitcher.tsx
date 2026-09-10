@@ -33,7 +33,7 @@ export default function LanguageSwitcher({ tone = 'onLight' }: { tone?: Tone }) 
         type="button"
         onClick={() => setLang('en')}
         aria-pressed={lang === 'en'}
-        className={`transition-colors cursor-pointer ${lang === 'en' ? c.active : c.idle}`}
+        className={`inline-flex min-h-[44px] items-center px-2 -mx-1 -my-3 transition-colors cursor-pointer ${lang === 'en' ? c.active : c.idle}`}
       >
         EN
       </button>
@@ -44,7 +44,7 @@ export default function LanguageSwitcher({ tone = 'onLight' }: { tone?: Tone }) 
         type="button"
         onClick={() => setLang('zh')}
         aria-pressed={lang === 'zh'}
-        className={`transition-colors cursor-pointer normal-case ${lang === 'zh' ? c.active : c.idle}`}
+        className={`inline-flex min-h-[44px] items-center px-2 -mx-1 -my-3 normal-case transition-colors cursor-pointer ${lang === 'zh' ? c.active : c.idle}`}
       >
         中文
       </button>
