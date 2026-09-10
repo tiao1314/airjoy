@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Chinese glyphs are not covered by Inter; fall through to Noto Sans SC.
+   Inter is kept first so Latin text renders identically in both languages. */
+html[lang='zh'] body,
+html[lang='zh'] input,
+html[lang='zh'] select,
+html[lang='zh'] textarea,
+html[lang='zh'] button {
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
