@@ -2,6 +2,8 @@
 
 Air conditioning for homes and businesses across London and surrounding areas.
 
+**Live: https://tiao1314.github.io/airjoy/**
+
 React 18 + TypeScript + Vite + Tailwind CSS. English / 简体中文.
 
 ## Running it
@@ -86,6 +88,46 @@ than a white screen.
 transmitted anywhere — there is no backend, no email, no third-party form service, and
 no analytics. The on-page copy states this plainly. Wire it to a real endpoint before
 expecting to receive enquiries.
+
+## Deploying
+
+The site is published to GitHub Pages from the `gh-pages` branch. To redeploy:
+
+```bash
+npm run deploy
+```
+
+That builds with `VITE_BASE=/airjoy/`, copies `index.html` to `404.html` (Pages
+has no server-side rewrites, so that copy is what makes a deep link like
+`/airjoy/site` boot the app) and force-pushes the result to `gh-pages`.
+
+### Switching to automatic deploys
+
+`deploy/github-pages-workflow.yml` is a ready-to-use GitHub Actions workflow that
+rebuilds and redeploys on every push to `main`. It is not installed because the
+token in use lacks the `workflow` scope. To enable it:
+
+```bash
+gh auth refresh -h github.com -s workflow     # approve once in the browser
+mkdir -p .github/workflows
+cp deploy/github-pages-workflow.yml .github/workflows/deploy.yml
+git add .github && git commit -m "Add Pages deploy workflow" && git push
+```
+
+Then set Pages to build from GitHub Actions:
+
+```bash
+gh api -X PUT repos/tiao1314/airjoy/pages -f 'build_type=workflow'
+```
+
+After that `npm run deploy` and the `gh-pages` branch are no longer needed.
+
+### Base path
+
+`VITE_BASE` sets both the Vite `base` and the router `basename`, so the two can
+never disagree. It defaults to `/` for local dev and root-hosted deploys; the
+Pages build sets it to `/airjoy/`. If you move the site to a custom domain at the
+root, drop `VITE_BASE` and rebuild.
 
 ## Project layout
 
