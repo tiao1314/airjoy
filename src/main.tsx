@@ -12,10 +12,7 @@ if (!rootEl) throw new Error('#root not found')
 createRoot(rootEl).render(
   <StrictMode>
     <LanguageProvider>
-      <BrowserRouter
-        basename={import.meta.env.BASE_URL}
-        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-      >
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<CinematicPage />} />
           <Route path="/site" element={<SitePage />} />
