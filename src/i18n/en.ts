@@ -24,7 +24,7 @@ export const en = {
     everyday: 'Everyday',
     comfort: 'comfort',
     cursorOpen: 'feel cool',
-    cursorClose: 'close',
+    cursorEnter: 'enter site',
     enterSite: 'Enter site',
   },
 
@@ -43,6 +43,7 @@ export const en = {
     eyebrow: 'AIR CONDITIONING, MADE SIMPLE',
     titleA: 'Comfort,',
     titleB: 'all year',
+    titleSep: ' ',
     titleC: 'round.',
     bodyA: 'A cooler summer. A cosier winter.',
     bodyB: 'Air conditioning for homes and businesses across London and surrounding areas.',

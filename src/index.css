@@ -23,3 +23,33 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ── Chinese typography ──────────────────────────────────────────────────
+   Inter's tracking values are tuned for Latin letterforms. Applied to
+   full-width CJK glyphs they read wrong in two specific ways: the negative
+   tracking on display headings crowds the characters, and the wide tracking
+   on small label text pulls them apart (Chinese has no case distinction for
+   letter-spacing to open up). Tight Latin leading also clips taller
+   ideographs, so headings get more room.
+
+   Elements marked [data-latin] are brand marks that stay in Latin script in
+   every language, so they keep their original treatment. */
+
+html[lang='zh'] [class*='tracking-widest']:not([data-latin]),
+html[lang='zh'] [class*='tracking-[0.']:not([data-latin]) {
+  letter-spacing: 0.04em;
+}
+
+html[lang='zh'] [class*='tracking-tight']:not([data-latin]) {
+  letter-spacing: 0;
+}
+
+html[lang='zh'] :is(h1, h2, h3):not([data-latin]) {
+  line-height: 1.3;
+}
+
+/* Full-width CJK punctuation carries its own side bearing; trimming the
+   trailing gap keeps a line ending in 。or ，optically flush. */
+html[lang='zh'] :is(h1, h2, h3):not([data-latin]) {
+  text-wrap: pretty;
+}

@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:gap-6 sm:text-left">
           <div className="flex shrink-0 items-center gap-2">
             <Wind className="h-6 w-6 shrink-0 text-[#0B3B60]" aria-hidden="true" />
-            <span className="text-2xl font-bold tracking-tight text-[#12303F]">{t.brand.name}</span>
+            <span className="text-2xl font-bold tracking-tight text-[#12303F]" data-latin>{t.brand.name}</span>
           </div>
 
           <p className="text-sm text-[#4A5C66]">{t.footer.tagline}</p>

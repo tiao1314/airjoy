@@ -30,7 +30,7 @@ export const zh: Dict = {
     everyday: '每一天',
     comfort: '都舒适',
     cursorOpen: '感受清凉',
-    cursorClose: '关闭',
+    cursorEnter: '进入网站',
     enterSite: '进入网站',
   },
 
@@ -49,6 +49,7 @@ export const zh: Dict = {
     eyebrow: '空调，原来可以很简单',
     titleA: '四季如春，',
     titleB: '全年',
+    titleSep: '',
     titleC: '舒适。',
     bodyA: '夏天更清凉，冬天更温暖。',
     bodyB: '为伦敦及周边地区的住宅与商业空间提供空调服务。',

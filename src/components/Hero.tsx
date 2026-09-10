@@ -21,7 +21,9 @@ export default function Hero() {
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.03] text-[#12303F]">
               {t.hero.titleA}
               <br />
-              {t.hero.titleB} <span className="text-[#2F6E9E]">{t.hero.titleC}</span>
+              {t.hero.titleB}
+              {t.hero.titleSep}
+              <span className="text-[#2F6E9E]">{t.hero.titleC}</span>
             </h1>
 
             <p className="mt-6 max-w-md text-[15px] sm:text-base leading-relaxed text-[#4A5C66]">

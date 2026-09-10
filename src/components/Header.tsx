@@ -30,7 +30,7 @@ export default function Header() {
             className={`flex shrink-0 items-center gap-2 rounded-lg ${FOCUS} md:justify-self-start`}
           >
             <Wind className="h-5 w-5 shrink-0 text-[#0B3B60]" aria-hidden="true" />
-            <span className="text-xl font-bold tracking-tight text-[#12303F]">{t.brand.name}</span>
+            <span className="text-xl font-bold tracking-tight text-[#12303F]" data-latin>{t.brand.name}</span>
           </Link>
 
           <nav aria-label={t.nav.menu} className="hidden md:flex md:items-center md:gap-8">

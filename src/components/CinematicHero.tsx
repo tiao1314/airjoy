@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Settings, Wind } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useIsTouch } from '../hooks/useIsTouch'
 import { useT } from '../i18n'
 import { AIRJOY_BACKGROUND_VIDEO, AIRJOY_REVEAL_VIDEO } from '../data/videos'
-
-const FADE_MS = 600
 
 /** Gradient-text helper — the wordmark, the temperature and the caption all use it. */
 const gradientText = (background: string) => ({
@@ -24,12 +22,11 @@ export default function CinematicHero() {
   const t = useT()
   const isTouch = useIsTouch()
 
+  const navigate = useNavigate()
   const [showSecond, setShowSecond] = useState(false)
-  const [fading, setFading] = useState(false)
 
   const secondRef = useRef<HTMLVideoElement | null>(null)
   const cursorRef = useRef<HTMLDivElement | null>(null)
-  const fadeTimer = useRef<number | null>(null)
 
   /* Cursor position is written straight to the node on every mousemove. Routing it
      through React state would re-render the whole section per pixel and introduce
@@ -56,47 +53,38 @@ export default function CinematicHero() {
     }
   }, [isTouch])
 
-  useEffect(
-    () => () => {
-      if (fadeTimer.current !== null) window.clearTimeout(fadeTimer.current)
-    },
-    [],
-  )
+  /* The landing page is an intro, not a toggle: the first click reveals the
+     second video, and the second click (or that video reaching its end) carries
+     you through to the site. */
+  const enterSite = useCallback(() => navigate('/site'), [navigate])
 
-  const close = useCallback(() => {
-    setFading((alreadyFading) => {
-      if (alreadyFading) return alreadyFading
-      setShowSecond(false)
-      fadeTimer.current = window.setTimeout(() => {
-        setFading(false)
-        secondRef.current?.pause()
-        fadeTimer.current = null
-      }, FADE_MS)
-      return true
-    })
-  }, [])
-
-  const toggle = useCallback(() => {
+  const handleClick = useCallback(() => {
     if (showSecond) {
-      close()
+      enterSite()
       return
     }
-    if (fading) return
+    setShowSecond(true)
+  }, [showSecond, enterSite])
+
+  /* Playback starts here rather than in the click handler. Chrome suspends
+     muted, video-only media it considers invisible, so calling play() while the
+     element is still at opacity 0 gets the stream killed with "video-only
+     background media was paused to save power". Effects run after the browser
+     has painted, by which point the fade to opacity 1 is under way. */
+  useEffect(() => {
+    if (!showSecond) return
 
     const video = secondRef.current
-    if (video) {
-      video.currentTime = 1
-      const played = video.play()
-      // Autoplay policies reject muted playback only rarely, but an unhandled
-      // rejection would surface as a console error on the landing page.
-      if (played && typeof played.catch === 'function') played.catch(() => undefined)
-    }
-    setShowSecond(true)
-  }, [showSecond, fading, close])
+    if (!video) return
+
+    video.currentTime = 1
+    const played = video.play()
+    if (played && typeof played.catch === 'function') played.catch(() => undefined)
+  }, [showSecond])
 
   return (
     <section
-      onClick={toggle}
+      onClick={handleClick}
       className={`relative w-full h-screen overflow-hidden ${isTouch ? 'cursor-auto' : 'cursor-none'}`}
     >
       {/* Painted behind the footage so a slow or blocked video never shows white. */}
@@ -120,7 +108,7 @@ export default function CinematicHero() {
           aria-hidden="true"
         >
           <span className="text-white text-sm font-medium tracking-wide select-none">
-            {showSecond ? t.cinematic.cursorClose : t.cinematic.cursorOpen}
+            {showSecond ? t.cinematic.cursorEnter : t.cinematic.cursorOpen}
           </span>
         </div>
       )}
@@ -142,7 +130,7 @@ export default function CinematicHero() {
         muted
         playsInline
         preload="auto"
-        onEnded={close}
+        onEnded={enterSite}
         style={{
           opacity: showSecond ? 1 : 0,
           transition: 'opacity 600ms ease',
@@ -168,6 +156,7 @@ export default function CinematicHero() {
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-2 sm:gap-3 max-w-[70%] sm:max-w-md">
             <h1
+              data-latin
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
               style={gradientText(WORDMARK_GRADIENT)}
             >
@@ -185,6 +174,7 @@ export default function CinematicHero() {
           </div>
 
           <span
+            data-latin
             className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight shrink-0"
             style={{ color: '#0B3B60' }}
           >
@@ -233,7 +223,7 @@ export default function CinematicHero() {
               </span>
             </div>
 
-            <span className="text-xs sm:text-sm font-medium tracking-[0.2em] text-white/60 sm:text-[rgba(11,59,96,0.6)]">
+            <span data-latin className="text-xs sm:text-sm font-medium tracking-[0.2em] text-white/60 sm:text-[rgba(11,59,96,0.6)]">
               {t.brand.caps}
             </span>
           </div>

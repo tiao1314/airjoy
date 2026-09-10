@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Minus, Plus } from 'lucide-react'
 import { useT } from '../i18n'
 
 /**
@@ -51,12 +51,14 @@ export default function FAQ() {
                     <span className="text-base font-semibold text-[#12303F] transition-colors sm:text-lg">
                       {item.q}
                     </span>
-                    <Plus
-                      aria-hidden="true"
-                      className={`h-4 w-4 shrink-0 text-[#12303F] transition-transform duration-200 ${
-                        isOpen ? 'rotate-45' : ''
-                      }`}
-                    />
+                    {/* Swap the glyph rather than rotating it: a rotated plus
+                        reads as a close/dismiss ×, but this control collapses an
+                        answer, so a minus is the honest affordance. */}
+                    {isOpen ? (
+                      <Minus aria-hidden="true" className="h-4 w-4 shrink-0 text-[#12303F]" />
+                    ) : (
+                      <Plus aria-hidden="true" className="h-4 w-4 shrink-0 text-[#12303F]" />
+                    )}
                   </button>
 
                   {/* grid-rows animates the collapse; `invisible` (which transitions
